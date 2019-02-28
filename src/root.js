@@ -13,8 +13,8 @@ export const pathAbsolute = (root) => {
 
 // path.resolve() retorna un string
 export const convertInAbsolute = (root) => {
-  const isRelative = path.resolve(root);
-  return isRelative;
+  const pathResolve = path.resolve(root);
+  return pathResolve;
 };
 
 /**
@@ -26,15 +26,14 @@ export const convertInAbsolute = (root) => {
 // stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos.
 // fs.readdirSync(path[, options]) devuelve string o un directorio o buffer
 
-// let files = [];
+// let mdFiles = [];
 export const isDirOrFile = (path) => {
   const readDirectory = fs.readdirSync(path);
   return readDirectory;
 };
 
 export const readDirectory = (path, options) => {
-  const statsIsDirectory = fs.Stats.isDirectory(path);
-  
+  const statsIsDirectory = fs.Stats(path).isDirectory;
 };
 // path.extname() retorna una cadena
 

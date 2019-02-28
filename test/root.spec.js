@@ -10,11 +10,7 @@ describe('Deberia evaluar la ruta', () => {
   it('Deberia retornar false si la ruta es relativa', () => {
     expect(pathAbsolute('LIM008-fe-md-links\\src\\main.js')).toBe(false);
   });
-<<<<<<< HEAD
-});
-=======
 }); 
->>>>>>> 948ed06a39de0c00151b714c519d6555ab90e15b
 
 describe('Deberia convertir una ruta relativa en absoluta', () => {
   it('Deberia ser una función', () => {
@@ -23,11 +19,7 @@ describe('Deberia convertir una ruta relativa en absoluta', () => {
   it('Deberia convertir la ruta en absoluta', () => {
     return expect(convertInAbsolute('src\\main.js')).toBe('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\src\\main.js');
   });
-<<<<<<< HEAD
-});
-=======
 }); 
->>>>>>> 948ed06a39de0c00151b714c519d6555ab90e15b
 
 describe('Deberia verificar si es directorio', () => {
   it('Deberia ser una función', () => {
@@ -51,8 +43,4 @@ describe('Deberia extraer los archivo con extensión .md', () => {
   it('Deberia no ser un archivo md', () => {
     expect(valideMdFiles('').toBe(false));
   });
-<<<<<<< HEAD
 }); 
-=======
-}); 
->>>>>>> 948ed06a39de0c00151b714c519d6555ab90e15b
