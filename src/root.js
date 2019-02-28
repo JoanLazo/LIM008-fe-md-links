@@ -20,25 +20,32 @@ export const convertInAbsolute = (root) => {
 /**
  * 
  * @param {ruta o directorio} path 
- * @param {--save o --stats} options 
  */
 // dirent.isDirectory () retorna un bolean, dirent.isFile () retorna un boleano
-// stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos.
+// stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos, stats.isFile().
 // fs.readdirSync(path[, options]) devuelve string o un directorio o buffer
 
-// let mdFiles = [];
-export const isDirOrFile = (path) => {
-  const readDirectory = fs.readdirSync(path);
-  return readDirectory;
+
+export const isDirOrFile = (root, fileArray) => {
+  fileArray = [];
+  const readDirectory = fs.readdirSync(root);
+  readDirectory.forEach((element) => {
+    const joinRoutes = path.join(root, element);
+    if (fs.statSync(joinRoutes).isDirectory() === true) {
+      fileArray = isDirOrFile(joinRoutes);
+    } else {
+      fileArray.push(joinRoutes);
+    }
+  });
+  return fileArray;
 };
 
-export const readDirectory = (path, options) => {
-  const statsIsDirectory = fs.Stats(path).isDirectory;
-};
 // path.extname() retorna una cadena
 
-export const valideMdFiles = () => {  
-
+export const isMdFiles = (file) => {  
+  const isMdOrNot = path.extname(file);
+  
+  return isMdOrNot;
 };
 
 // fs.readFileSync(path[, options])

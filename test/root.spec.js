@@ -1,4 +1,6 @@
-import { pathAbsolute, convertInAbsolute, searchFiles, valideMdFiles } from '../src/root.js';
+import { pathAbsolute, convertInAbsolute, isDirOrFile, isMdFiles } from '../src/root.js';
+
+const files = ['C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md', 'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md'];
 
 describe('Deberia evaluar la ruta', () => {
   it('Deveria ser una función', () => {
@@ -17,30 +19,24 @@ describe('Deberia convertir una ruta relativa en absoluta', () => {
     return expect(typeof convertInAbsolute).toBe('function');
   });
   it('Deberia convertir la ruta en absoluta', () => {
-    return expect(convertInAbsolute('src\\main.js')).toBe('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\src\\main.js');
+    expect(convertInAbsolute('src\\main.js')).toBe('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\src\\main.js');
   });
 }); 
 
-describe('Deberia verificar si es directorio', () => {
+describe('Deberia acummular un array con las rutas de los archivos', () => {
   it('Deberia ser una función', () => {
-    return expect(typeof searchFiles).toBe('function');
+    return expect(typeof isDirOrFile).toBe('function');
   });
-  it('Deberia abrir la ruta del directorio', () => {
-    expect(searchFiles('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links')).toBe(true);
-  });
-  it('Deberia tener la ruta de un archivo', () => {
-    expect(searchFiles('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\README.md').toBe(false));
+  it('Deberia retornar un array con las rutas de los archivos', () => {
+    expect(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')).toEqual(files);
   });
 }); 
 
-describe('Deberia extraer los archivo con extensión .md', () => {
-  it('Deberia ser una función que verifica si es un archivo .md', () => {
-    return expect(typeof valideMdFiles).toBe('function');
+describe('Deberia llenar un array con archivos .md', () => {
+  it('Deberia ser una función', () => {
+    return expect(typeof isMdFiles).toBe('function');
   });
   it('Deberia ser un archivo .md', () => {
-    expect(valideMdFiles('README.md')).toBe(true);
-  });
-  it('Deberia no ser un archivo md', () => {
-    expect(valideMdFiles('').toBe(false));
+    expect(isMdFiles('file.md')).toBe('.md');
   });
 }); 
