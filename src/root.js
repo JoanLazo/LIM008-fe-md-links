@@ -3,31 +3,39 @@
   * @param {Evalua si la ruta es absoluta o relativa} path 
   */
 const path = require('path');
+const fs = require('fs');
 
+// path.isAbsolute() retorna un boleano
 export const pathAbsolute = (root) => {
   const isAbsolute = path.isAbsolute(root); 
-  let convertInAbsolute = '';
-  if (isAbsolute === true) {
-    convertInAbsolute += root;
-  } else {
-    convertInAbsolute += path.resolve(root);
-  }
-  return convertInAbsolute;
+  return isAbsolute;
+};
+
+// path.resolve() retorna un string
+export const convertInAbsolute = (root) => {
+  const isRelative = path.resolve(root);
+  return isRelative;
 };
 
 /**
  * 
- * @param {ruta que busca archivos} root 
- * @param {buscar a partir de la ubicacion actual de la ruta} search
+ * @param {ruta o directorio} path 
+ * @param {--save o --stats} options 
  */
-// dirent.isDirectory () retorna un bolean dirent.isFile () retorna un boleano
+// dirent.isDirectory () retorna un bolean, dirent.isFile () retorna un boleano
+// stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos.
+// fs.readdirSync(path[, options]) devuelve string o un directorio o buffer
 
-
-export const searchFiles = () => {
- 
+// let files = [];
+export const isDirOrFile = (path) => {
+  const readDirectory = fs.readdirSync(path);
+  return readDirectory;
 };
 
-const fs = require('fs');
+export const readDirectory = (path, options) => {
+  const statsIsDirectory = fs.Stats.isDirectory(path);
+  
+};
 // path.extname() retorna una cadena
 
 export const valideMdFiles = () => {  
