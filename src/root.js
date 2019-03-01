@@ -70,3 +70,7 @@ myMarked.setOptions({
 // Compile
 console.log(myMarked('I am using __markdown__.'));
 
+export const convertInHtml = (root) => {
+  const markedJs = myMarked(root);
+  return markedJs;
+};
