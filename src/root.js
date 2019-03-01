@@ -1,6 +1,6 @@
 /**
   * 
-  * @param {Evalua si la ruta es absoluta o relativa} path 
+  * @param {Evalua si la ruta es absoluta o relativa} root 
   */
 const path = require('path');
 const fs = require('fs');
@@ -17,35 +17,56 @@ export const convertInAbsolute = (root) => {
   return pathResolve;
 };
 
-/**
- * 
- * @param {ruta o directorio} path 
- */
 // dirent.isDirectory () retorna un bolean, dirent.isFile () retorna un boleano
 // stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos, stats.isFile().
 // fs.readdirSync(path[, options]) devuelve string o un directorio o buffer
+// fs.readFileSync(path[, options])
 
-
-export const isDirOrFile = (root, fileArray) => {
-  fileArray = [];
+export const isDirOrFile = (root) => {
+  let fileArray = [];
   const readDirectory = fs.readdirSync(root);
   readDirectory.forEach((element) => {
     const joinRoutes = path.join(root, element);
-    if (fs.statSync(joinRoutes).isDirectory() === true) {
-      fileArray = isDirOrFile(joinRoutes);
-    } else {
+    if (fs.statSync(joinRoutes).isDirectory()) {
+      fileArray = fileArray.concat(isDirOrFile(joinRoutes));
+    } else if (fs.statSync(joinRoutes).isFile() && path.extname(joinRoutes) === '.md') {
       fileArray.push(joinRoutes);
+    } else {
+      console.log('No se encontraron archivos');
     }
   });
   return fileArray;
 };
 
+// console.log(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 // path.extname() retorna una cadena
 
-export const isMdFiles = (file) => {  
-  const isMdOrNot = path.extname(file);
-  
-  return isMdOrNot;
+export const readFiles = (root, options) => {  
+  const readMdFiles = fs.readFileSync(root, options);
+  return readMdFiles;
 };
+console.log(readFiles('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md'));
 
-// fs.readFileSync(path[, options])
+// marked(markdownString [,options] [,callback])
+// Create reference instance
+const myMarked = require('marked');
+const jsdom = require(' jsdom ');
+const { JSDOM } = jsdom;
+
+myMarked.setOptions({
+  renderer: new myMarked.Renderer(),
+  highlight: function(code) {
+    return require('highlight.js').highlightAuto(code).value;
+  },
+  pedantic: false,
+  gfm: true,
+  tables: true,
+  breaks: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  xhtml: false
+});
+// Compile
+console.log(myMarked('I am using __markdown__.'));
+

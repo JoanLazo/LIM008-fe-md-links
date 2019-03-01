@@ -10,6 +10,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "build": "babel src -d lib",
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage"
   },
