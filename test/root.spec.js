@@ -27,12 +27,12 @@ describe('Deberia acummular un array con las rutas de los archivos', () => {
   it('Deberia ser una función', () => {
     return expect(typeof isDirOrFile).toBe('function');
   });
-  it('Deberia retornar un array con las rutas de los archivos', () => {
+  it('Deberia retornar un array con las rutas de los archivos .md', () => {
     expect(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')).toEqual(files);
   });
 }); 
 
-describe('Deberia llenar un array con archivos .md', () => {
+describe('Deberia extraer el contenido del archivo .md', () => {
   it('Deberia ser una función', () => {
     return expect(typeof isMdFiles).toBe('function');
   });
