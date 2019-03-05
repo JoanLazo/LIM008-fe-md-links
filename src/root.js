@@ -80,5 +80,7 @@ console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO
 //   .then(res => console.log('will not get here...'))
 export const validateAndStats = (arrObjLinks) => {
  
+
+ const 
 }
  
