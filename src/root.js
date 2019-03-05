@@ -4,9 +4,9 @@
   */
 const path = require('path');
 const fs = require('fs');
-const marked = require('marked');
-const jsdom = require(' jsdom ');
-const { JSDOM } = jsdom;
+const myMarked = require('marked');
+// const jsdom = require(' jsdom ');
+// const { JSDOM } = jsdom;
 
 // path.isAbsolute() retorna un boleano
 export const pathAbsolute = (root) => {
@@ -40,50 +40,42 @@ export const isDirOrFile = (root) => {
   });
   return fileArray;
 };
-console.log(isDirOrFile('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
+// console.log(isDirOrFile('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 
 // console.log(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 // path.extname() retorna una cadena
 
 export const readFilesMd = (arrFiles) => { 
-  const links = []; 
-  arrFiles.forEach( file => {
-  const readMdFiles = fs.readFileSync(file, 'utf8');
-  links.push(readMdFiles);
+  let arrLinks = []; 
+  arrFiles.forEach((file) => {
+    const readMdFiles = fs.readFileSync(file, 'utf8');
+    const renderer = new myMarked.Renderer();
+    renderer.link = (href, title, text) => {
+      arrLinks.push({ href, text, file: file});
+    };
+    myMarked(readMdFiles, {renderer});
   });
-  return links;
+  return arrLinks;
 };
-console.log(readFiles('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md'));
+console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')));
 
 // marked(markdownString [,options] [,callback])
 // Create reference instance
-
-
-myMarked.setOptions({
-  renderer: new marked.Renderer(),
-  highlight: function(code) {
-    return require('highlight.js').highlightAuto(code).value;
-  },
-  pedantic: false,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  xhtml: false
-});
+// myMarked.setOptions({
+//   renderer: new myMarked.Renderer(),
+//   highlight: function(code) {
+//     return require('highlight.js').highlightAuto(code).value;
+//   },
+//   pedantic: false,
+//   gfm: true,
+//   tables: true,
+//   breaks: false,
+//   sanitize: false,
+//   smartLists: true,
+//   smartypants: false
+//   xhtml: false
+// });
 // Compile
-console.log(myMarked('I am using __markdown__.'));
+// console.log(myMarked('I am using __markdown__.'));
 
-export const convertInHtml = (root) => {
-  const markedJs = new marked.Renderer(root);
-  return markedJs;
-};
 
-export  const extractLinks = (html, root) => {
-  const jsDom = new JSDON(html);
-  let objLinks = {};
-  let arrObjLinks = [];
-  const 
-}

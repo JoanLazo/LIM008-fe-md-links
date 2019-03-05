@@ -1,6 +1,17 @@
-import { pathAbsolute, convertInAbsolute, isDirOrFile, isMdFiles } from '../src/root.js';
+import { pathAbsolute, convertInAbsolute, isDirOrFile, readFilesMd } from '../src/root.js';
 
 const files = ['C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md', 'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md'];
+
+const arrFiles = [ { href:
+  'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+text: 'agenda',
+file:
+  'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md' },
+{ href: 'https://claseslaboratoria.slack.com/messages',
+  text: 'slack',
+  file:
+  'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md' } ];
+
 
 describe('Deberia evaluar la ruta', () => {
   it('Deveria ser una función', () => {
@@ -32,11 +43,12 @@ describe('Deberia acummular un array con las rutas de los archivos', () => {
   });
 }); 
 
-describe('Deberia extraer el contenido del archivo .md', () => {
+
+describe('Deberia extraer los links md en un array de objetos', () => {
   it('Deberia ser una función', () => {
-    return expect(typeof isMdFiles).toBe('function');
+    return expect(typeof readFilesMd).toBe('function');
   });
-  it('Deberia ser un archivo .md', () => {
-    expect(isMdFiles('file.md')).toBe('.md');
+  it('Deberia extraer el link , su nombre y ya ruta de los archivos .md', () => {
+    expect(readFilesMd(files)).toEqual(arrFiles);
   });
 }); 
