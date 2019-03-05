@@ -5,8 +5,8 @@
 const path = require('path');
 const fs = require('fs');
 const myMarked = require('marked');
-// const jsdom = require(' jsdom ');
-// const { JSDOM } = jsdom;
+const fetch = require('node-fetch');
+
 
 // path.isAbsolute() retorna un boleano
 export const pathAbsolute = (root) => {
@@ -46,16 +46,16 @@ export const isDirOrFile = (root) => {
 // path.extname() retorna una cadena
 
 export const readFilesMd = (arrFiles) => { 
-  let arrLinks = []; 
+  let arrObjLinks = []; 
   arrFiles.forEach((file) => {
     const readMdFiles = fs.readFileSync(file, 'utf8');
     const renderer = new myMarked.Renderer();
     renderer.link = (href, title, text) => {
-      arrLinks.push({ href, text, file: file});
+      arrObjLinks.push({ href, text, file: file});
     };
     myMarked(readMdFiles, {renderer});
   });
-  return arrLinks;
+  return arrObjLinks;
 };
 console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')));
 
@@ -64,18 +64,21 @@ console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO
 // myMarked.setOptions({
 //   renderer: new myMarked.Renderer(),
 //   highlight: function(code) {
-//     return require('highlight.js').highlightAuto(code).value;
-//   },
-//   pedantic: false,
-//   gfm: true,
-//   tables: true,
 //   breaks: false,
-//   sanitize: false,
-//   smartLists: true,
-//   smartypants: false
-//   xhtml: false
-// });
-// Compile
-// console.log(myMarked('I am using __markdown__.'));
 
 
+// function checkStatus(res) {
+//   if (res.ok) { // res.status >= 200 && res.status < 300
+//       return res;
+//   } else {
+//       throw MyCustomError(res.statusText);
+//   }
+// }
+
+// fetch('https://httpbin.org/status/400')
+//   .then(checkStatus)
+//   .then(res => console.log('will not get here...'))
+export const validateAndStats = (arrObjLinks) => {
+ 
+}
+ 
