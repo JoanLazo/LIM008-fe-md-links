@@ -34,8 +34,6 @@ export const isDirOrFile = (root) => {
       fileArray = fileArray.concat(isDirOrFile(joinRoutes));
     } else if (fs.statSync(joinRoutes).isFile() && path.extname(joinRoutes) === '.md') {
       fileArray.push(joinRoutes);
-    } else {
-      console.log('No se encontraron archivos');
     }
   });
   return fileArray;
@@ -57,30 +55,30 @@ export const readFilesMd = (arrFiles) => {
   });
   return arrObjLinks;
 };
-console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')));
-
-// marked(markdownString [,options] [,callback])
-// Create reference instance
-// myMarked.setOptions({
-//   renderer: new myMarked.Renderer(),
-//   highlight: function(code) {
-//   breaks: false,
-
 
 // function checkStatus(res) {
 //   if (res.ok) { // res.status >= 200 && res.status < 300
-//       return res;
+//     return res;
 //   } else {
-//       throw MyCustomError(res.statusText);
+//     throw MyCustomError(res.statusText);
 //   }
 // }
-
-// fetch('https://httpbin.org/status/400')
+// fetch(arrObjLinks)
 //   .then(checkStatus)
-//   .then(res => console.log('will not get here...'))
-export const validateAndStats = (arrObjLinks) => {
- 
+//   .then(res => console.log('fail'));
 
- const 
-}
- 
+// fetch('https://github.com/')
+//     .then(res => {
+//         console.log(res.ok);
+//         console.log(res.status);
+//         console.log(res.statusText);
+//         console.log(res.headers.raw());
+//         console.log(res.headers.get('content-type'));
+//     });   
+
+export const validateOption = (arrObjLinks) => { 
+  const arrLinks = arrObjLinks.map((links) => links.href);
+  const linkFetch = arrLinks.map(links => fetch(links));
+  console.log(linkFetch)
+};
+console.log(validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))));
