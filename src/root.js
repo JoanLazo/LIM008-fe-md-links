@@ -77,8 +77,27 @@ export const readFilesMd = (arrFiles) => {
 //     });   
 
 export const validateOption = (arrObjLinks) => { 
-  const arrLinks = arrObjLinks.map((links) => links.href);
-  const linkFetch = arrLinks.map(links => fetch(links));
-  console.log(linkFetch)
+  const linkFetch = arrObjLinks.map(links => fetch(links));
+  return Promise.all(linkFetch)
+    .then(response => {
+      const arrLinksValidate = arrObjLinks.map((objLinks, linksValidate) => {
+        objLinks.status = response[linksValidate].status;
+        objLinks.statusText = response[linksValidate].statusText;
+        return objLinks;
+      });
+      return arrLinksValidate;
+    });
 };
-console.log(validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))));
+
+// validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))).then(res => { 
+//   console.log(res); 
+// });
+// console.log(validateOption([ { href:
+//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// text: 'agenda',
+// file:
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md' },
+// { href: 'https://claseslaboratoria.slack.com/messages',
+//   text: 'slack',
+//   file:
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md' } ]));

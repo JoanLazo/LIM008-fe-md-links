@@ -1,8 +1,8 @@
-import { pathAbsolute, convertInAbsolute, isDirOrFile, readFilesMd } from '../src/root.js';
+import { pathAbsolute, convertInAbsolute, isDirOrFile, readFilesMd, validateOption } from '../src/root.js';
 
 const files = ['C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md', 'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md'];
 
-const arrFiles = [ { href:
+const arrObjFiles = [ { href:
   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
 text: 'agenda',
 file:
@@ -12,6 +12,19 @@ file:
   file:
   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md' } ];
 
+const linksValidate = [ { href:
+  'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+text: 'agenda',
+file:
+  'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+status: 200,
+statusText: 'OK' },
+{ href: 'https://claseslaboratoria.slack.com/messages',
+  text: 'slack',
+  file:
+  'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
+  status: 200,
+  statusText: 'OK' } ];
 
 describe('Deberia evaluar la ruta', () => {
   it('Deveria ser una función', () => {
@@ -49,6 +62,20 @@ describe('Deberia extraer los links md en un array de objetos', () => {
     return expect(typeof readFilesMd).toBe('function');
   });
   it('Deberia extraer el link , su nombre y ya ruta de los archivos .md', () => {
-    expect(readFilesMd(files)).toEqual(arrFiles);
+    expect(readFilesMd(files)).toEqual(arrObjFiles);
   });
 }); 
+
+describe('Deberia validar los links mostrado el status y el statusText', () => {
+  it('Deberia ser una función', () => {
+    return expect(typeof validateOption).toBe('function');
+  });
+  it('Deberia validar el array de objetos de links y agregar el status y el statusText', (done) => {
+    return validateOption(arrObjFiles)
+      .then((arrObjFiles) => {
+        expect(arrObjFiles).toEqual(linksValidate);
+        done();
+      });
+  });
+}); 
+
