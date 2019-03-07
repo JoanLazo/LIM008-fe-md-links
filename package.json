@@ -9,6 +9,9 @@
     "jest"
   ],
   "license": "MIT",
+  "bin": {
+    "md-links": "src/cli.js"
+  },
   "scripts": {
     "build": "babel src -d lib",
     "eslint": "eslint --ext .js src/ test/",

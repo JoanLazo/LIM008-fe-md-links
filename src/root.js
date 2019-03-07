@@ -54,6 +54,8 @@ export const readFilesMd = (arrFiles) => {
   });
   return arrObjLinks;
 };
+// console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')));
+
 
 // function checkStatus(res) {
 //   if (res.ok) { // res.status >= 200 && res.status < 300
@@ -98,25 +100,26 @@ export const uniqueLinks = (arrObjLinksValidate) => {
   return newSetLinks;
 };
 
-// console.log(uniqueLinks([{ href:
-//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// console.log(uniqueLinks([ { href:
+//     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
 // text: 'agenda',
 // file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
-// status: 200,
-// statusText: 'OK' }, { href:
-//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
-// text: 'agenda',
-// file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+//      'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
 // status: 200,
 // statusText: 'OK' },
 // { href: 'https://claseslaboratoria.slack.com/messages',
 //   text: 'slack',
 //   file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
+//      'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
 //   status: 200,
-//   statusText: 'OK' } ]));
+//   statusText: 'OK' },
+// { href:
+//      'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
+// text: 'asincronia',
+// file:
+//      'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\roto.md',
+// status: 404,
+// statusText: 'Not Found' } ]));
 
   
 export const brokenLinks = (arrObjLinksValidate) => { 
@@ -148,6 +151,27 @@ export const statsOption = (arrObjLinksValidate) => {
   const totalLinks = arrObjLinksValidate.length;
   return totalLinks;
 };
+
+// console.log(statsOption([{ href:
+//     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// text: 'agenda',
+// file:
+//     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+// status: 200,
+// statusText: 'OK' }, { href:
+//     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// text: 'agenda',
+// file:
+//     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+// status: 200,
+// statusText: 'OK' },
+// { href: 'https://Claseslaboratori.slack.com/messages',
+//   text: 'slack',
+//   file:
+//     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
+//   status: 404,
+//   statusText: 'NOT FOUND' } ]));
+
 // validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))).then(res => { 
 //   console.log(res); 
 // });
