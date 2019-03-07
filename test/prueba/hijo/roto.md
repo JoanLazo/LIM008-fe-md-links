@@ -1,0 +1,1 @@
+[asincronia](https://carlosazaustr.es/manejando-la-asincronia-e-javascript/)

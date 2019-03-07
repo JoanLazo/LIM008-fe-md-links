@@ -1,13 +1,13 @@
-/**
-  * 
-  * @param {Evalua si la ruta es absoluta o relativa} root 
-  */
+
 const path = require('path');
 const fs = require('fs');
 const myMarked = require('marked');
 const fetch = require('node-fetch');
 
-
+/**
+  * 
+  * @param {Evalua si la ruta es absoluta o relativa} root 
+  */
 // path.isAbsolute() retorna un boleano
 export const pathAbsolute = (root) => {
   const isAbsolute = path.isAbsolute(root); 
@@ -40,7 +40,6 @@ export const isDirOrFile = (root) => {
 };
 // console.log(isDirOrFile('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 
-// console.log(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 // path.extname() retorna una cadena
 
 export const readFilesMd = (arrFiles) => { 
@@ -89,15 +88,66 @@ export const validateOption = (arrObjLinks) => {
     });
 };
 
-// validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))).then(res => { 
-//   console.log(res); 
-// });
-// console.log(validateOption([ { href:
+// El objeto Set te permite almacenar valores únicos de cualquier tipo, incluso valores primitivos u objetos de referencia.
+// const myArray = ['value1', 'value2', 'value3'];
+// const mySet = new Set(myArray);
+// console.log([...mySet]);
+
+export const uniqueLinks = (arrObjLinksValidate) => {
+  const newSetLinks = [...new Set(arrObjLinksValidate.map((links) => links.href))];
+  return newSetLinks;
+};
+
+// console.log(uniqueLinks([{ href:
 //   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
 // text: 'agenda',
 // file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md' },
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+// status: 200,
+// statusText: 'OK' }, { href:
+//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// text: 'agenda',
+// file:
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+// status: 200,
+// statusText: 'OK' },
 // { href: 'https://claseslaboratoria.slack.com/messages',
 //   text: 'slack',
 //   file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md' } ]));
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
+//   status: 200,
+//   statusText: 'OK' } ]));
+
+  
+export const brokenLinks = (arrObjLinksValidate) => { 
+  const arrBrokenLinks = arrObjLinksValidate.filter(link => link.status >= 400);
+  return arrBrokenLinks;
+};
+
+// console.log(brokenLinks([{ href:
+//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// text: 'agenda',
+// file:
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+// status: 200,
+// statusText: 'OK' }, { href:
+//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+// text: 'agenda',
+// file:
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+// status: 200,
+// statusText: 'OK' },
+// { href: 'https://Claseslaboratori.slack.com/messages',
+//   text: 'slack',
+//   file:
+//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
+//   status: 404,
+//   statusText: 'NOT FOUND' } ]));
+
+export const statsOption = (arrObjLinksValidate) => {
+  const totalLinks = arrObjLinksValidate.length;
+  return totalLinks;
+};
+// validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))).then(res => { 
+//   console.log(res); 
+// });
