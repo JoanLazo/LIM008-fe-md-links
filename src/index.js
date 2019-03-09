@@ -2,29 +2,29 @@ import { pathAbsolute, convertInAbsolute, isDirOrFile, readFilesMd, validateOpti
 import { resolve } from 'path';
 import { rejects } from 'assert';
 
-const options = {
-  validate: '--validate',
-  stats: '--stats',
-  validateandstats: '--validate --stats'
-};
+// const options = {
+//   validate: '--validate',
+//   stats: '--stats',
+//   validateandstats: '--validate --stats'
+// };
 
-const mdLinks = (root, options) => {
-  const promise = new Promise((resolve, reject) => {
-    const path = pathAbsolute(root);
-    let rootAbs = '';
-    if (path === false) {
-      rootAbs.push(convertInAbsolute(root));
-    } else {
-      rootAbs = root;
-    }
-    const allLinks = readFilesMd(isDirOrFile(rootAbs));
-    if (options === '--validate') {
-      return validateOption(allLinks));
-    } else if (options === '--stats') {
+// const mdLinks = (root, options) => {
+//   const promise = new Promise((resolve, reject) => {
+//     const path = pathAbsolute(root);
+//     let rootAbs = '';
+//     if (path === false) {
+//       rootAbs.push(convertInAbsolute(root));
+//     } else {
+//       rootAbs = root;
+//     }
+//     const allLinks = readFilesMd(isDirOrFile(rootAbs));
+//     if (options === '--validate') {
+//       return validateOption(allLinks));
+//     } else if (options === '--stats') {
        
-    } 
-  });
-};
+//     } 
+//   });
+// };
 
 // const mdLinks = require("md-links");
 
