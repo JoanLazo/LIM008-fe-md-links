@@ -27,15 +27,19 @@ export const convertInAbsolute = (root) => {
 
 export const isDirOrFile = (root) => {
   let fileArray = [];
-  const readDirectory = fs.readdirSync(root);
-  readDirectory.forEach((element) => {
-    const joinRoutes = path.join(root, element);
-    if (fs.statSync(joinRoutes).isDirectory()) {
-      fileArray = fileArray.concat(isDirOrFile(joinRoutes));
-    } else if (fs.statSync(joinRoutes).isFile() && path.extname(joinRoutes) === '.md') {
-      fileArray.push(joinRoutes);
-    }
-  });
+  if (fs.statSync(root).isDirectory() === false) {
+    fileArray.push(root);
+  } else {
+    const readDirectory = fs.readdirSync(root);
+    readDirectory.forEach((element) => {
+      const joinRoutes = path.join(root, element);
+      if (fs.statSync(joinRoutes).isDirectory()) {
+        fileArray = fileArray.concat(isDirOrFile(joinRoutes));
+      } else if (fs.statSync(joinRoutes).isFile() && path.extname(joinRoutes) === '.md') {
+        fileArray.push(joinRoutes);
+      }
+    });
+  }
   return fileArray;
 };
 // console.log(isDirOrFile('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
