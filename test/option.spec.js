@@ -36,17 +36,9 @@ file:
 status: 404,
 statusText: 'Not Found' } ];
 
-const uniqueL = ['https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0', 
-  'https://claseslaboratoria.slack.com/messages',
-  'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/'];
+const uniqueL = 1;
 
-const brokenL = [{ href:
-    'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
-text: 'asincronia',
-file:
-    'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\roto.md',
-status: 404,
-statusText: 'Not Found' }]; 
+const brokenL = 1; 
 
 const totalLinks = 3;
 

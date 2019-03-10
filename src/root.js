@@ -16,9 +16,16 @@ export const pathAbsolute = (root) => {
 
 // path.resolve() retorna un string
 export const convertInAbsolute = (root) => {
-  const pathResolve = path.resolve(root);
-  return pathResolve;
+  const boleanRoot = pathAbsolute(root);
+  let rootAbsolute;
+  if (boleanRoot === true) {
+    rootAbsolute = root;
+  } else {
+    rootAbsolute = path.resolve(root);
+  }
+  return rootAbsolute;
 };
+// console.log(convertInAbsolute('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\prueba'));
 // `${process.cwd(path)}/${paths.basename(path)}`; 
 // dirent.isDirectory () retorna un bolean, dirent.isFile () retorna un boleano
 // stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos, stats.isFile().
@@ -26,13 +33,14 @@ export const convertInAbsolute = (root) => {
 // fs.readFileSync(path[, options])
 
 export const isDirOrFile = (root) => {
+  const rootAbsolute = convertInAbsolute(root);
   let fileArray = [];
-  if (fs.statSync(root).isDirectory() === false) {
-    fileArray.push(root);
+  if (fs.statSync(rootAbsolute).isDirectory() === false) {
+    fileArray.push(rootAbsolute);
   } else {
-    const readDirectory = fs.readdirSync(root);
+    const readDirectory = fs.readdirSync(rootAbsolute);
     readDirectory.forEach((element) => {
-      const joinRoutes = path.join(root, element);
+      const joinRoutes = path.join(rootAbsolute, element);
       if (fs.statSync(joinRoutes).isDirectory()) {
         fileArray = fileArray.concat(isDirOrFile(joinRoutes));
       } else if (fs.statSync(joinRoutes).isFile() && path.extname(joinRoutes) === '.md') {
@@ -48,7 +56,8 @@ export const isDirOrFile = (root) => {
 
 export const readFilesMd = (arrFiles) => { 
   let arrObjLinks = []; 
-  arrFiles.forEach((file) => {
+  const arrRootFiles = isDirOrFile(arrFiles);
+  arrRootFiles.forEach((file) => {
     const readMdFiles = fs.readFileSync(file, 'utf8');
     const renderer = new myMarked.Renderer();
     renderer.link = (href, title, text) => {
@@ -81,17 +90,23 @@ export const readFilesMd = (arrFiles) => {
 //         console.log(res.headers.get('content-type'));
 //     });   
 
-export const validateOption = (arrObjLinks) => { 
-  const linkFetch = arrObjLinks.map(links => fetch(links));
-  return Promise.all(linkFetch)
-    .then(response => {
-      const arrLinksValidate = arrObjLinks.map((objLinks, linksValidate) => {
-        objLinks.status = response[linksValidate].status;
-        objLinks.statusText = response[linksValidate].statusText;
-        return objLinks;
-      });
-      return arrLinksValidate;
-    });
+export const validateOption = (arrFiles) => { 
+  const arrObjLinks = readFilesMd(arrFiles);
+  const newPromise = arrObjLinks.map(links => new Promise((resolve, reject) => {
+    fetch(links)
+      .then(response => {
+        if (response.status >= 200 && response.status < 400) {
+          links.status = response.status;
+          links.statusText = response.statusText;
+          resolve(links);
+        } else {
+          links.status = response.status;
+          links.statusText = 'Fail';
+          resolve(links);
+        }
+      }).catch((err) => reject(err));
+  }));
+  return Promise.all(newPromise);
 };
 
 // El objeto Set te permite almacenar valores únicos de cualquier tipo, incluso valores primitivos u objetos de referencia.
@@ -99,9 +114,9 @@ export const validateOption = (arrObjLinks) => {
 // const mySet = new Set(myArray);
 // console.log([...mySet]);
 
-export const uniqueLinks = (arrObjLinksValidate) => {
-  const newSetLinks = [...new Set(arrObjLinksValidate.map((links) => links.href))];
-  return newSetLinks;
+export const uniqueLinks = (arrObjLinks) => {
+  const newSetLinks = [...new Set(arrObjLinks.map((links) => links.href))];
+  return newSetLinks.length;
 };
 
 // console.log(uniqueLinks([ { href:
@@ -128,7 +143,7 @@ export const uniqueLinks = (arrObjLinksValidate) => {
   
 export const brokenLinks = (arrObjLinksValidate) => { 
   const arrBrokenLinks = arrObjLinksValidate.filter(link => link.status >= 400);
-  return arrBrokenLinks;
+  return arrBrokenLinks.length;
 };
 
 // console.log(brokenLinks([{ href:
@@ -151,8 +166,8 @@ export const brokenLinks = (arrObjLinksValidate) => {
 //   status: 404,
 //   statusText: 'NOT FOUND' } ]));
 
-export const statsOption = (arrObjLinksValidate) => {
-  const totalLinks = arrObjLinksValidate.length;
+export const totalLinks = (arrObjLinks) => {
+  const totalLinks = arrObjLinks.length;
   return totalLinks;
 };
 
@@ -177,5 +192,9 @@ export const statsOption = (arrObjLinksValidate) => {
 //   statusText: 'NOT FOUND' } ]));
 
 // validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))).then(res => { 
+//   console.log(res); 
+// });
+
+// validateOption('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba').then(res => { 
 //   console.log(res); 
 // });
