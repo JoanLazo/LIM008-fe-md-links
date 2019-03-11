@@ -36,25 +36,25 @@ file:
 status: 404,
 statusText: 'Not Found' } ];
 
-const uniqueL = 1;
+const uniqueL = 3;
 
 const brokenL = 1; 
 
 const totalLinks = 3;
 
-describe('Deberia validar los links mostrado el status y el statusText', () => {
+describe('Deberia retornar un array de objetos de los links más el status y el statusText', () => {
   it('Deberia ser una función', () => {
     return expect(typeof validateOption).toBe('function');
   });
   it('Deberia validar el array de objetos de links y agregar el status y el statusText', (done) => {
     return validateOption(arrObjFiles)
-      .then((arrObjFiles) => {
+      .then(() => {
         expect(arrObjFiles).toEqual(linksValidate);
         done();
-      });
+      }).catch(() => done());
   });
 }); 
-describe('Deberia mostrar el array de objetos de los links unicos', () => {
+describe('Deberia retornar el array de objetos de los links unicos', () => {
   it('Deberia ser una función', () => {
     return expect(typeof uniqueLinks).toBe('function');
   });
@@ -63,7 +63,7 @@ describe('Deberia mostrar el array de objetos de los links unicos', () => {
   });
 }); 
 
-describe('Deberia mostrar el array de objetos de los links rotos', () => {
+describe('Deberia retornar el array de objetos de los links rotos', () => {
   it('Deberia ser una función', () => {
     return expect(typeof brokenLinks).toBe('function');
   });
@@ -72,7 +72,7 @@ describe('Deberia mostrar el array de objetos de los links rotos', () => {
   });
 }); 
   
-describe('Deberia mostrar la cantidad total de links', () => {
+describe('Deberia retornar la cantidad total de links', () => {
   it('Deberia ser una función', () => {
     return expect(typeof statsOption).toBe('function');
   });

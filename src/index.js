@@ -10,7 +10,7 @@ export const mdLinks = (route, options) => {
         validateOption(arrObjLinksAndTextAndFile)
           .then(response => {
             response.forEach((resLinks) => {
-              resolve(resLinks.file, resLinks.href, resLinks.statusText,resLinks.status, resLinks.text);
+              resolve(console.log(`${resLinks.file}, ${resLinks.href}, ${resLinks.statusText},${resLinks.status}, ${resLinks.text}`));
             });
           });
       } else if (options.validate === false && options.stats) {
@@ -20,11 +20,11 @@ export const mdLinks = (route, options) => {
           .then(response => resolve({total: totalLinks(response), unique: uniqueLinks(response), broken: brokenLinks(response)})); 
       } else {
         arrObjLinksAndTextAndFile.forEach((objLinks) => {
-          resolve(objLinks.file, objLinks.href, objLinks.text);
+          resolve(console.log(`${objLinks.file}, ${objLinks.href}, ${objLinks.text}`));
         });
       }
     } else {
-      resolve('No se encontraron links');
+      reject('No se encontraron links');
     }
   });
   return promise;
