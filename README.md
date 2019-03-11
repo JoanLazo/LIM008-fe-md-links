@@ -20,6 +20,13 @@ algunas estadísticas.
 ## Diagrama de Flujo
 
 ![Diagrama de flujo md](https://3.bp.blogspot.com/-STcCkd0b2lw/XIZq8L9W89I/AAAAAAAALXI/k-KC8wf6-oo46D0GQ2RyHeaKwet3HMongCLcBGAs/s1600/diagrama%2Bde%2Bflujo%2Bmd.jpg)
+
+### Instalación 
+
+```js
+npm install JoanLazo/md-links
+```
+
 ### Modo de uso
 
 #### `mdLinks(path, options)`
