@@ -36,6 +36,9 @@ describe('Deberia convertir una ruta relativa en absoluta', () => {
     return expect(typeof convertInAbsolute).toBe('function');
   });
   it('Deberia convertir la ruta en absoluta', () => {
+    expect(convertInAbsolute('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\src\\main.js')).toEqual('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\src\\main.js');
+  });
+  it('Deberia convertir la ruta en absoluta', () => {
     expect(convertInAbsolute('src\\main.js')).toBe('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\src\\main.js');
   });
 }); 
@@ -43,6 +46,9 @@ describe('Deberia convertir una ruta relativa en absoluta', () => {
 describe('Deberia acummular un array con las rutas de los archivos', () => {
   it('Deberia ser una función', () => {
     return expect(typeof isDirOrFile).toBe('function');
+  });
+  it('Deberia retornar un array con las rutas de los archivos .md', () => {
+    expect(isDirOrFile('README.md')).toEqual(['README.md']);
   });
   it('Deberia retornar un array con las rutas de los archivos .md', () => {
     expect(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')).toEqual(files);

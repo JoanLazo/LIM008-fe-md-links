@@ -1,4 +1,4 @@
-import { validateOption, uniqueLinks, brokenLinks, statsOption } from '../src/root.js';
+import { validateOption, uniqueLinks, brokenLinks, totalLinks } from '../src/root.js';
 
 const arrObjFiles = [ { href:
     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
@@ -34,22 +34,22 @@ text: 'asincronia',
 file:
     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\roto.md',
 status: 404,
-statusText: 'Not Found' } ];
+statusText: 'FAIL' } ];
 
 const uniqueL = 3;
 
 const brokenL = 1; 
 
-const totalLinks = 3;
+const totalL = 3;
 
 describe('Deberia retornar un array de objetos de los links más el status y el statusText', () => {
   it('Deberia ser una función', () => {
     return expect(typeof validateOption).toBe('function');
   });
   it('Deberia validar el array de objetos de links y agregar el status y el statusText', (done) => {
-    return validateOption(arrObjFiles)
-      .then(() => {
-        expect(arrObjFiles).toEqual(linksValidate);
+    return validateOption(arrObjFiles)  
+      .then((arrRespuestas) => {
+        expect(arrRespuestas).toEqual(linksValidate);
         done();
       }).catch(() => done());
   });
@@ -74,9 +74,9 @@ describe('Deberia retornar el array de objetos de los links rotos', () => {
   
 describe('Deberia retornar la cantidad total de links', () => {
   it('Deberia ser una función', () => {
-    return expect(typeof statsOption).toBe('function');
+    return expect(typeof totalLinks).toBe('function');
   });
   it('Deberia tener la cantidad de links totales de la respuesta de validate', () => {
-    expect(statsOption(linksValidate)).toBe(totalLinks);
+    expect(totalLinks(linksValidate)).toBe(totalL);
   });
 }); 

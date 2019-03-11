@@ -33,14 +33,13 @@ export const convertInAbsolute = (root) => {
 // fs.readFileSync(path[, options])
 
 export const isDirOrFile = (root) => {
-  const rootAbsolute = convertInAbsolute(root);
   let fileArray = [];
-  if (fs.statSync(rootAbsolute).isDirectory() === false) {
-    fileArray.push(rootAbsolute);
+  if (fs.statSync(root).isDirectory() === false) {
+    fileArray.push(root);
   } else {
-    const readDirectory = fs.readdirSync(rootAbsolute);
+    const readDirectory = fs.readdirSync(root);
     readDirectory.forEach((element) => {
-      const joinRoutes = path.join(rootAbsolute, element);
+      const joinRoutes = path.join(root, element);
       if (fs.statSync(joinRoutes).isDirectory()) {
         fileArray = fileArray.concat(isDirOrFile(joinRoutes));
       } else if (fs.statSync(joinRoutes).isFile() && path.extname(joinRoutes) === '.md') {
@@ -50,14 +49,13 @@ export const isDirOrFile = (root) => {
   }
   return fileArray;
 };
-// console.log(isDirOrFile('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
+// console.log(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 
 // path.extname() retorna una cadena
 
 export const readFilesMd = (arrFiles) => { 
   let arrObjLinks = []; 
-  const arrRootFiles = isDirOrFile(arrFiles);
-  arrRootFiles.forEach((file) => {
+  arrFiles.forEach((file) => {
     const readMdFiles = fs.readFileSync(file, 'utf8');
     const renderer = new myMarked.Renderer();
     renderer.link = (href, title, text) => {
@@ -67,7 +65,7 @@ export const readFilesMd = (arrFiles) => {
   });
   return arrObjLinks;
 };
-// console.log(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')));
+// console.log(readFilesMd('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 
 
 // function checkStatus(res) {
@@ -91,8 +89,7 @@ export const readFilesMd = (arrFiles) => {
 //     });   
 
 export const validateOption = (arrFiles) => { 
-  const arrObjLinks = readFilesMd(arrFiles);
-  const newPromise = arrObjLinks.map(links => new Promise((resolve, reject) => {
+  const newPromise = arrFiles.map(links => new Promise((resolve, reject) => {
     fetch(links)
       .then(response => {
         if (response.status >= 200 && response.status < 400) {
@@ -101,7 +98,7 @@ export const validateOption = (arrFiles) => {
           resolve(links);
         } else {
           links.status = response.status;
-          links.statusText = 'Fail';
+          links.statusText = 'FAIL';
           resolve(links);
         }
       }).catch((err) => reject(err));
@@ -142,7 +139,7 @@ export const uniqueLinks = (arrObjLinks) => {
 
   
 export const brokenLinks = (arrObjLinksValidate) => { 
-  const arrBrokenLinks = arrObjLinksValidate.filter(link => link.status >= 400);
+  const arrBrokenLinks = arrObjLinksValidate.filter(link => link.statusText === 'FAIL');
   return arrBrokenLinks.length;
 };
 
@@ -191,7 +188,7 @@ export const totalLinks = (arrObjLinks) => {
 //   status: 404,
 //   statusText: 'NOT FOUND' } ]));
 
-// validateOption(readFilesMd(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'))).then(res => { 
+// validateOption('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba').then(res => { 
 //   console.log(res); 
 // });
 
