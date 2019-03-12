@@ -164,8 +164,8 @@ export const brokenLinks = (arrObjLinksValidate) => {
 //   statusText: 'NOT FOUND' } ]));
 
 export const totalLinks = (arrObjLinks) => {
-  const totalLinks = arrObjLinks.length;
-  return totalLinks;
+  const totalLinks = arrObjLinks;
+  return totalLinks.length;
 };
 
 // console.log(statsOption([{ href:
@@ -195,3 +195,10 @@ export const totalLinks = (arrObjLinks) => {
 // validateOption('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba').then(res => { 
 //   console.log(res); 
 // });
+// module.exports = convertInAbsolute;
+// module.exports = isDirOrFile;
+// module.exports = readFilesMd;
+// module.exports = validateOption;
+// module.exports = uniqueLinks;
+// module.exports = brokenLinks;
+// module.exports = totalLinks;

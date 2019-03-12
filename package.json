@@ -1,7 +1,7 @@
 {
-  "name": "social-network",
+  "name": "markdown-links",
   "version": "1.0.0",
-  "description": "Social Network @ Laboratoria",
+  "description": "md-links allows to validate and view the statistics of the links from md files or file paths",
   "main": "src/index.html",
   "keywords": [
     "javascript",
