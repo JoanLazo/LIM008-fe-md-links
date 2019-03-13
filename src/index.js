@@ -23,5 +23,5 @@ export const mdLinks = (route, options) => {
   });
   return promise;
 };
-
+// mdLinks('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba', {validate: true}).then(res => console.log(res));
 

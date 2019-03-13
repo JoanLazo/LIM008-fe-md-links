@@ -17,12 +17,7 @@ const options = {
 
 if (!path) {
   console.log('Debes ingresar la ruta de un archivo o directorio');
-} else if (option === '--validate' && moreOption === '--stats') {
-  options.validate = true;
-  mdLinks(path, options)
-    .then(response => console.log(`Total: ${totalLinks(response)} \nUnique: ${uniqueLinks(response)} \nBroken: ${brokenLinks(response)}`))
-    .catch(err => console.log(err));
-} else if (option === '--stats' && moreOption === '--validate') {
+} else if (option === '--validate' && moreOption === '--stats' || option === '--stats' && moreOption === '--validate') {
   options.validate = true;
   mdLinks(path, options)
     .then(response => console.log(`Total: ${totalLinks(response)} \nUnique: ${uniqueLinks(response)} \nBroken: ${brokenLinks(response)}`))
@@ -30,7 +25,7 @@ if (!path) {
 } else if (option === '--validate') {
   options.validate = true;
   mdLinks(path, options)
-    .then(response => response.forEach((objLinks) => console.log(`File: ${objLinks.file} \nLink: ${objLinks.href} \nStatus-Text: ${objLinks.statusText} \nStatus: ${objLinks.status}, \nText: ${objLinks.text}`)))
+    .then(response => response.forEach((objLinks) => console.log(`File: ${objLinks.file} \nLink: ${objLinks.href} \nStatus-Text: ${objLinks.statusText} \nStatus: ${objLinks.status} \nText: ${objLinks.text}`)))
     .catch(err => console.log(err));
 } else if (option === '--stats') {
   mdLinks(path, options)
