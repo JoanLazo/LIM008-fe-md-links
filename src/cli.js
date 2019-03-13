@@ -30,7 +30,7 @@ if (!path) {
 } else if (option === '--validate') {
   options.validate = true;
   mdLinks(path, options)
-    .then(response => response.forEach((objLinks) => console.log(`${objLinks.file}, ${objLinks.href}, ${objLinks.statusText}, ${objLinks.status}, ${objLinks.text}`)))
+    .then(response => response.forEach((objLinks) => console.log(`File: ${objLinks.file} \nLink: ${objLinks.href} \nStatus-Text: ${objLinks.statusText} \nStatus: ${objLinks.status}, \nText: ${objLinks.text}`)))
     .catch(err => console.log(err));
 } else if (option === '--stats') {
   mdLinks(path, options)
@@ -39,6 +39,6 @@ if (!path) {
 } else { 
   mdLinks(path, options)
     .then(response => response.forEach((objLinks) => 
-      console.log(`${objLinks.file}, ${objLinks.href}, ${objLinks.text}`)))
+      console.log(`File: ${objLinks.file} \nLink: ${objLinks.href} \nText: ${objLinks.text}`)))
     .catch(err => console.log(err));
 }
