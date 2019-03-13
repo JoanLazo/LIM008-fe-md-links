@@ -1,38 +1,33 @@
 import { validateOption, uniqueLinks, brokenLinks, totalLinks } from '../src/root.js';
 
 const arrObjFiles = [ { href:
-    'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
+  'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
 text: 'agenda',
-file:
-    'C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md' },
+file: `${process.cwd()}\\test\\prueba\\hijo\\file.md` },
 { href: 'https://claseslaboratoria.slack.com/messages',
   text: 'slack',
-  file:
-    'C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md' },
+  file: `${process.cwd()}\\test\\prueba\\hijo\\hola.md` },
 { href:
-    'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
+  'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
 text: 'asincronia',
-file:
-    'C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\roto.md' } ];
+file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md` } ];
+
 
 const linksValidate = [ { href:
     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
 text: 'agenda',
-file:
-    'C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
+file: `${process.cwd()}\\test\\prueba\\hijo\\file.md`,
 status: 200,
 statusText: 'OK' },
 { href: 'https://claseslaboratoria.slack.com/messages',
   text: 'slack',
-  file:
-    'C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
+  file: `${process.cwd()}\\test\\prueba\\hijo\\hola.md`,
   status: 200,
   statusText: 'OK' },
 { href:
     'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
 text: 'asincronia',
-file:
-    'C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\roto.md',
+file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md`,
 status: 404,
 statusText: 'FAIL' } ];
 
