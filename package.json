@@ -12,6 +12,10 @@
   "bin": {
     "md-links": "lib/cli.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoanLazo/md-links.git"
+  },
   "scripts": {
     "build": "babel src -d lib",
     "eslint": "eslint --ext .js src/ test/",
@@ -25,7 +29,7 @@
     "@babel/preset-env": "^7.3.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.1.0",
-    "eslint": "^5.10.0",
+    "eslint": "^5.10.0",S
     "eslint-plugin-jest": "^22.1.2",
     "jest": "^24.1.0",
     "regenerator-runtime": "^0.13.1"
