@@ -1,8 +1,8 @@
 {
-  "name": "markdown-links",
+  "name": "md-links",
   "version": "1.0.0",
   "description": "md-links allows to validate and view the statistics of the links from md files or file paths",
-  "main": "src/index.html",
+  "main": "lib/index.js",
   "keywords": [
     "javascript",
     "npm",
@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "bin": {
-    "md-links": "src/cli.js"
+    "md-links": "lib/cli.js"
   },
   "scripts": {
     "build": "babel src -d lib",

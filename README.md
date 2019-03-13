@@ -37,7 +37,6 @@ npm install JoanLazo/md-links
 - `options`: Un objeto con las siguientes propiedades:
   * `validate`: Booleano que determina si se desea validar los links
     encontrados.
-  * `stats`: Booleano que determina si se desea ver las estadísticas de los links encontrados.
 
 #### Ejemplo
 
@@ -91,9 +90,9 @@ Por ejemplo:
 
 ```sh
 $ md-links ./some/example.md --validate
-./some/example.md http://algo.com/2/3/ ok 200 Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
-./some/example.md http://google.com/ ok 301 Google
+./some/example.md http://algo.com/2/3/ OK 200 Link a algo
+./some/example.md https://otra-cosa.net/algun-doc.html FAIL 404 algún doc
+./some/example.md http://google.com/ OK 301 Google
 ```
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
