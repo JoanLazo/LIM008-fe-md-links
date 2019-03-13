@@ -24,7 +24,7 @@ algunas estadísticas.
 ### Instalación 
 
 ```js
-npm install JoanLazo/md-links
+npm install JoanLazo/md-links md-links
 ```
 
 ### Modo de uso
@@ -71,12 +71,7 @@ manera a través de la terminal:
 
 Por ejemplo:
 
-```sh
-$ md-links ./some/example.md
-./some/example.md http://algo.com/2/3/ Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html algún doc
-./some/example.md http://google.com/ Google
-```
+![md-links route](https://3.bp.blogspot.com/-Ql9JFlEfjpI/XIlorvxHBcI/AAAAAAAALY4/mdm2OsYreFEx5jeIC9sJf87nl93qYbrwACLcBGAs/s1600/md-links%2Bruta.png)
 
 #### Options
 
@@ -88,12 +83,7 @@ URL que responde ok, entonces consideraremos el link como ok.
 
 Por ejemplo:
 
-```sh
-$ md-links ./some/example.md --validate
-./some/example.md http://algo.com/2/3/ OK 200 Link a algo
-./some/example.md https://otra-cosa.net/algun-doc.html FAIL 404 algún doc
-./some/example.md http://google.com/ OK 301 Google
-```
+![md-links validate](https://1.bp.blogspot.com/-tbOvuZAIHZg/XIlorwc_ZMI/AAAAAAAALZA/VRaLFvi4BUgApMP924S5z-d4v-OiMcn4ACLcBGAs/s1600/md-links%2Bvalidate.png)
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
 la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
@@ -104,19 +94,13 @@ URL.
 Si pasamos la opción `--stats` el output (salida) será un texto con estadísticas
 básicas sobre los links.
 
-```sh
-$ md-links ./some/example.md --stats
-Total: 3
-Unique: 3
-```
+![md-links stats](https://1.bp.blogspot.com/-4-yRZNJCX6w/XIlor4zQgRI/AAAAAAAALY8/bnf5PgKFWZs8M_Lt7zVt7E9ewd0jdN2PgCLcBGAs/s1600/md-links%2Bstats.png)
 
 También podemos combinar `--stats` y `--validate` para obtener estadísticas que
 necesiten de los resultados de la validación.
 
-```sh
-$ md-links ./some/example.md --stats --validate
-Total: 3
-Unique: 3
-Broken: 1
-```
+![md-links s-v](https://3.bp.blogspot.com/-2VlAGhuI3EQ/XIlqu6d1suI/AAAAAAAALZQ/jWchNFiP5xMlcTm0z3BN8O-XzLCWSVQOACLcBGAs/s1600/md-links%2Bstats-validate.png)
 
+### Planificación
+
+![markdown-planificación](https://1.bp.blogspot.com/-_fuVdQ-TSA0/XIlnFVTXlfI/AAAAAAAALYo/Caqkm0_5jbE_Xm5OowNJ6cgngMF2bgyPgCLcBGAs/s1600/boards-mdlinks.png)

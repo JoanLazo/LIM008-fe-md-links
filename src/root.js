@@ -30,7 +30,7 @@ export const convertInAbsolute = (root) => {
 // dirent.isDirectory () retorna un bolean, dirent.isFile () retorna un boleano
 // stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos, stats.isFile().
 // fs.readdirSync(path[, options]) devuelve string o un directorio o buffer
-// fs.readFileSync(path[, options])
+// fs.readFileSync(path[, options])  path.extname() retorna una cadena
 
 export const isDirOrFile = (root) => {
   let fileArray = [];
@@ -51,33 +51,19 @@ export const isDirOrFile = (root) => {
 };
 // console.log(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 
-// path.extname() retorna una cadena
-
 export const readFilesMd = (arrFiles) => { 
   let arrObjLinks = []; 
   arrFiles.forEach((file) => {
     const readMdFiles = fs.readFileSync(file, 'utf8');
     const renderer = new myMarked.Renderer();
     renderer.link = (href, title, text) => {
-      arrObjLinks.push({ href, text, file: file});
+      arrObjLinks.push({ href, text: text.slice(0, 50), file: file});
     };
     myMarked(readMdFiles, {renderer});
   });
   return arrObjLinks;
 };
 // console.log(readFilesMd('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
-
-
-// function checkStatus(res) {
-//   if (res.ok) { // res.status >= 200 && res.status < 300
-//     return res;
-//   } else {
-//     throw MyCustomError(res.statusText);
-//   }
-// }
-// fetch(arrObjLinks)
-//   .then(checkStatus)
-//   .then(res => console.log('fail'));
 
 // fetch('https://github.com/')
 //     .then(res => {
@@ -116,89 +102,17 @@ export const uniqueLinks = (arrObjLinks) => {
   return newSetLinks.length;
 };
 
-// console.log(uniqueLinks([ { href:
-//     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
-// text: 'agenda',
-// file:
-//      'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
-// status: 200,
-// statusText: 'OK' },
-// { href: 'https://claseslaboratoria.slack.com/messages',
-//   text: 'slack',
-//   file:
-//      'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
-//   status: 200,
-//   statusText: 'OK' },
-// { href:
-//      'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
-// text: 'asincronia',
-// file:
-//      'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\roto.md',
-// status: 404,
-// statusText: 'Not Found' } ]));
-
   
 export const brokenLinks = (arrObjLinksValidate) => { 
   const arrBrokenLinks = arrObjLinksValidate.filter(link => link.statusText === 'FAIL');
   return arrBrokenLinks.length;
 };
 
-// console.log(brokenLinks([{ href:
-//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
-// text: 'agenda',
-// file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
-// status: 200,
-// statusText: 'OK' }, { href:
-//   'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
-// text: 'agenda',
-// file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
-// status: 200,
-// statusText: 'OK' },
-// { href: 'https://Claseslaboratori.slack.com/messages',
-//   text: 'slack',
-//   file:
-//   'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
-//   status: 404,
-//   statusText: 'NOT FOUND' } ]));
-
 export const totalLinks = (arrObjLinks) => {
   const totalLinks = arrObjLinks;
   return totalLinks.length;
 };
 
-// console.log(statsOption([{ href:
-//     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
-// text: 'agenda',
-// file:
-//     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
-// status: 200,
-// statusText: 'OK' }, { href:
-//     'https://docs.google.com/spreadsheets/d/1U9GRTMn_VNtqOCQdFznTeOTuUhrQor4EP4th3ipPsKM/edit#gid=0',
-// text: 'agenda',
-// file:
-//     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\file.md',
-// status: 200,
-// statusText: 'OK' },
-// { href: 'https://Claseslaboratori.slack.com/messages',
-//   text: 'slack',
-//   file:
-//     'C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba\\hijo\\hola.md',
-//   status: 404,
-//   statusText: 'NOT FOUND' } ]));
-
-// validateOption('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba').then(res => { 
-//   console.log(res); 
-// });
-
 // validateOption('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba').then(res => { 
 //   console.log(res); 
 // });
-// module.exports = convertInAbsolute;
-// module.exports = isDirOrFile;
-// module.exports = readFilesMd;
-// module.exports = validateOption;
-// module.exports = uniqueLinks;
-// module.exports = brokenLinks;
-// module.exports = totalLinks;
