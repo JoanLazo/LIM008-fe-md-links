@@ -24,16 +24,10 @@ export const convertInAbsolute = (root) => {
   }
   return rootAbsolute;
 };
-// console.log(convertInAbsolute('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\prueba'));
-// `${process.cwd(path)}/${paths.basename(path)}`; 
-// dirent.isDirectory () retorna un bolean, dirent.isFile () retorna un boleano
-// stats.isDirectory () Devuelve true si el fs.Statsobjeto describe un directorio de sistema de archivos, stats.isFile().
-// fs.readdirSync(path[, options]) devuelve string o un directorio o buffer
-// fs.readFileSync(path[, options])  path.extname() retorna una cadena
 
 export const isDirOrFile = (root) => {
   let fileArray = [];
-  if (fs.statSync(root).isDirectory() === false) {
+  if (fs.statSync(root).isDirectory() === false && path.extname(root) === '.md') {
     fileArray.push(root);
   } else {
     const readDirectory = fs.readdirSync(root);
@@ -62,16 +56,7 @@ export const readFilesMd = (arrFiles) => {
   });
   return arrObjLinks;
 };
-// console.log(readFilesMd('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
-
-// fetch('https://github.com/')
-//     .then(res => {
-//         console.log(res.ok);
-//         console.log(res.status);
-//         console.log(res.statusText);
-//         console.log(res.headers.raw());
-//         console.log(res.headers.get('content-type'));
-//     });   
+// console.log(readFilesMd('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')); 
 
 export const validateOption = (arrFiles) => { 
   const newPromise = arrFiles.map(links => new Promise((resolve, reject) => {
@@ -86,7 +71,7 @@ export const validateOption = (arrFiles) => {
           links.statusText = 'FAIL';
           resolve(links);
         }
-      }).catch((err) => reject(err));
+      }).catch((err) => reject(err)); 
   }));
   return Promise.all(newPromise);
 };
