@@ -25,6 +25,10 @@ export const convertInAbsolute = (root) => {
   return rootAbsolute;
 };
 
+/**
+ * 
+ * @param {ruta absoluta} root 
+ */
 export const isDirOrFile = (root) => {
   let fileArray = [];
   if (fs.statSync(root).isDirectory() === false && path.extname(root) === '.md') {
@@ -42,8 +46,11 @@ export const isDirOrFile = (root) => {
   }
   return fileArray;
 };
-// console.log(isDirOrFile('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba'));
 
+/**
+ * 
+ * @param {arr con las ruta de los archivos md} arrFiles 
+ */
 export const readFilesMd = (arrFiles) => { 
   let arrObjLinks = []; 
   arrFiles.forEach((file) => {
@@ -55,11 +62,14 @@ export const readFilesMd = (arrFiles) => {
     myMarked(readMdFiles, {renderer});
   });
   return arrObjLinks;
-};
-// console.log(readFilesMd('C:\\Users\\Laboratoria\\Documents\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba')); 
+}; 
 
-export const validateOption = (arrFiles) => { 
-  const newPromise = arrFiles.map(links => new Promise((resolve, reject) => {
+/**
+ * 
+ * @param {arr de objetos con href, link y text} arrObjLinks 
+ */
+export const validateOption = (arrObjLinks) => { 
+  const arrPromises = arrObjLinks.map(links => new Promise((resolve) => {
     fetch(links)
       .then(response => {
         if (response.status >= 200 && response.status < 400) {
@@ -71,11 +81,14 @@ export const validateOption = (arrFiles) => {
           links.statusText = 'FAIL';
           resolve(links);
         }
-      }).catch((err) => reject(err)); 
+      }).catch(() => {
+        links.status = 'Link no valido';
+        links.statusText = 'FAIL';
+        resolve(links);
+      }); 
   }));
-  return Promise.all(newPromise);
+  return Promise.all(arrPromises);
 };
-
 // El objeto Set te permite almacenar valores únicos de cualquier tipo, incluso valores primitivos u objetos de referencia.
 // const myArray = ['value1', 'value2', 'value3'];
 // const mySet = new Set(myArray);
@@ -86,7 +99,10 @@ export const uniqueLinks = (arrObjLinks) => {
   return newSetLinks.length;
 };
 
-  
+/**
+ * 
+ * @param {arr de obj con href,link,text,textStatus y status} arrObjLinksValidate 
+ */  
 export const brokenLinks = (arrObjLinksValidate) => { 
   const arrBrokenLinks = arrObjLinksValidate.filter(link => link.statusText === 'FAIL');
   return arrBrokenLinks.length;
@@ -97,6 +113,3 @@ export const totalLinks = (arrObjLinks) => {
   return totalLinks.length;
 };
 
-// validateOption('C:\\Users\\ivan_\\Desktop\\PROYECTO MARKDOWN\\LIM008-fe-md-links\\test\\prueba').then(res => { 
-//   console.log(res); 
-// });

@@ -14,7 +14,12 @@ file: `${process.cwd()}\\test\\prueba\\hijo\\file.md` },
 { href:
   'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
 text: 'asincronia',
-file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md` } ];
+file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md` },
+{
+  'href': 'https://dejs.org/api/path.html',
+  'text': 'node-path',
+  'file': `${process.cwd()}\\test\\prueba\\hijo\\roto.md`,
+}, ];
 
 describe('Deberia evaluar la ruta', () => {
   it('Deveria ser una función', () => {

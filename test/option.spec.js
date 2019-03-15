@@ -10,7 +10,12 @@ file: `${process.cwd()}\\test\\prueba\\hijo\\file.md` },
 { href:
   'https://Carlosazaustre.es/manejando-la-asincronia-en-javascript.1/',
 text: 'asincronia',
-file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md` } ];
+file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md` },
+{
+  'href': 'https://dejs.org/api/path.html',
+  'text': 'node-path',
+  'file': `${process.cwd()}\\test\\prueba\\hijo\\roto.md`,
+}];
 
 
 const linksValidate = [ { href:
@@ -29,13 +34,18 @@ statusText: 'OK' },
 text: 'asincronia',
 file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md`,
 status: 404,
-statusText: 'FAIL' } ];
+statusText: 'FAIL' },
+{ href: 'https://dejs.org/api/path.html',
+  text: 'node-path',
+  file: `${process.cwd()}\\test\\prueba\\hijo\\roto.md`,
+  status: 'Link no valido',
+  statusText: 'FAIL' } ];
 
-const uniqueL = 3;
+const uniqueL = 4;
 
-const brokenL = 1; 
+const brokenL = 2; 
 
-const totalL = 3;
+const totalL = 4;
 
 describe('Deberia retornar un array de objetos de los links más el status y el statusText', () => {
   it('Deberia ser una función', () => {
